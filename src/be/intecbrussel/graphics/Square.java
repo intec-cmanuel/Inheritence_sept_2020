@@ -1,6 +1,12 @@
 package be.intecbrussel.graphics;
 
 public class Square extends Rectangle {
+    private static int count;
+
+    {
+        count++;
+    }
+
 
     public Square() {
         this(10, 1, 1);
@@ -25,6 +31,10 @@ public class Square extends Rectangle {
     public void setSide(int side) {
         super.setHeight(side);
         super.setWidth(side);
+    }
+
+    public static int getCount() {
+        return count;
     }
 
     @Override

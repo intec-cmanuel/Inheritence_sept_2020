@@ -1,20 +1,19 @@
 package be.intecbrussel.graphics;
 
-public class Rectangle {
-    private int height;
-    private int width;
-    private int xPos;
-    private int yPos;
-    public static final int CORNERS;
+import java.util.Objects;
+
+public class Rectangle extends Shape{
+    public static final int ANGLES = 4;
     private static int count;
+
+    private int height;
+    private int width = height + 5;
+
 
     {
         count++;
     }
-    static {
-        CORNERS = 4;
 
-    }
     public Rectangle(){
         this(1, 1);
 
@@ -28,18 +27,16 @@ public class Rectangle {
     }
 
     public Rectangle(int height, int width, int xPos, int yPos){
-        this.height = height;
-        this.width = width;
-        this.xPos = xPos;
-        this.yPos = yPos;
-
+        setHeight(height);
+        setWidth(width);
+        setPosition(xPos, yPos);
     }
 
     public Rectangle(Rectangle rectangle){
-        this.height = rectangle.height;
-        this.width = rectangle.width;
-        this.xPos = rectangle.xPos;
-        this.yPos = rectangle.yPos;
+        this(rectangle.getHeight(), rectangle.getWidth(), rectangle.getX(), rectangle.getY());
+//        setHeight(rectangle.getHeight());
+//        setWidth(rectangle.getWidth());
+//        setPosition(rectangle.getX(), rectangle.getY());
 
     }
 
@@ -55,29 +52,16 @@ public class Rectangle {
         this.width = width < 0 ? -width : width;
     }
 
-    public void setPosition(int x , int y){
-        this.xPos = x;
-        this.yPos = y;
-    }
-
-    public void setXPos (int x){
-        this.xPos = x;
-    }
-
-    public void setYPos (int y){
-        this.yPos = y;
-    }
-
     public void grow(int d){
         this.height = this.height + Math.abs(d);
         this.width = this.width + Math.abs(d);
     }
 
-    public int getArea(){
+    public double getArea(){
         return height * width;
     }
 
-    public int getPerimeter(){
+    public double getPerimeter(){
         return (width + height)*2;
     }
 
@@ -89,21 +73,28 @@ public class Rectangle {
         return this.width;
     }
 
-    public int getX(){
-        return this.xPos;
-    }
-
-    public int getY(){
-        return this.yPos;
-    }
-
     @Override
     public String toString() {
         return "Rectangle{" +
                 "height=" + height +
                 ", width=" + width +
-                ", xPos=" + xPos +
-                ", yPos=" + yPos +
+                ", xPos=" + getX() +
+                ", yPos=" + getY() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Rectangle rectangle = (Rectangle) o;
+        return height == rectangle.height &&
+                width == rectangle.width;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), height, width);
     }
 }
