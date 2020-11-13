@@ -1,5 +1,7 @@
 package be.intecbrussel.graphics;
 
+import java.util.Objects;
+
 public class Triangle extends Shape{
     public static final int ANGLES = 3;
     private static int count;
@@ -64,5 +66,30 @@ public class Triangle extends Shape{
 
     public static int getCount() {
         return count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Triangle triangle = (Triangle) o;
+        return height == triangle.height &&
+                width == triangle.width &&
+                perpendicular == triangle.perpendicular;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), height, width, perpendicular);
+    }
+
+    @Override
+    public String toString() {
+        return "Triangle{" +
+                "height=" + height +
+                ", width=" + width +
+                ", perpendicular=" + perpendicular +
+                "} " + super.toString();
     }
 }

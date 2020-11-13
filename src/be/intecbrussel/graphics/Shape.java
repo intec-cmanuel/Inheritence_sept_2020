@@ -57,4 +57,12 @@ public abstract class Shape {
     public int hashCode() {
         return Objects.hash(x, y);
     }
+
+    @Override
+    public String toString() {
+        return "Shape{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

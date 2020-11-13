@@ -46,4 +46,9 @@ public class Square extends Rectangle {
     public void setWidth(int width) {
         setSide(width);
     }
+
+    @Override
+    public String toString() {
+        return "Square{} " + super.toString();
+    }
 }
